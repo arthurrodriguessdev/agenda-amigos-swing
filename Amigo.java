@@ -1,4 +1,4 @@
-package AgendaAmigos;
+// package AgendaAmigos;
 
 public class Amigo {
 	private static int idIndex = 1;
@@ -17,7 +17,7 @@ public class Amigo {
 	}
 	
 	public int gerarId() {
-		return this.idIndex++;
+		return idIndex++;
 	}
 
 	public String getNome() {

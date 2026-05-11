@@ -1,27 +1,25 @@
-package AgendaAmigos;
+// package AgendaAmigos;
+
 import java.awt.EventQueue;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JList;
-import javax.swing.JTable;
+import java.util.List;
 import javax.swing.border.LineBorder;
 import javax.swing.*;
 
 public class AgendaContatosView extends JFrame{
 	private JPanel painelBotoes;
+	private JPanel painelBusca;
+	private JTextField inputBusca;
 	private JButton btnExcluir;
 	private JButton btnIncluir;
 	private JButton btnBuscar;
 	private JButton btnAlterar;
 	private JTable tabelaAmigos;
 	private DefaultTableModel modeloTabela;
-	private JDialog dialogAdicionar;
 	private static final String[] colunasTabela = {
 			"ID", "Nome", "Apelido", "E-mail", "Celular"
 	};
@@ -35,9 +33,18 @@ public class AgendaContatosView extends JFrame{
 		setBounds(100, 100, 540, 474);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		// Painel de Busca (superior)
+		painelBusca = new JPanel(new BorderLayout(10, 10));
+		painelBusca.setBackground(new Color(98, 160, 234));
+		inputBusca = new JTextField();
+		btnBuscar = new JButton("Buscar");
+		painelBusca.add(inputBusca, BorderLayout.CENTER);
+		painelBusca.add(btnBuscar, BorderLayout.EAST);
+		getContentPane().add(painelBusca, BorderLayout.NORTH);
+
+		// Painel de Botões (inferior)
 		painelBotoes = new JPanel();
 		painelBotoes.setBackground(new Color(98, 160, 234));
-		getContentPane().add(painelBotoes, BorderLayout.SOUTH);
 		
 		btnExcluir = new JButton("Excluir");
 		painelBotoes.add(btnExcluir);
@@ -45,16 +52,11 @@ public class AgendaContatosView extends JFrame{
 		btnIncluir = new JButton("Incluir");
 		painelBotoes.add(btnIncluir);
 		
-		btnBuscar = new JButton("Buscar");
-		btnBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		painelBotoes.add(btnBuscar);
-		
 		btnAlterar = new JButton("Alterar");
 		painelBotoes.add(btnAlterar);
 		
+		getContentPane().add(painelBotoes, BorderLayout.SOUTH);
+
 		// Tabela
 		modeloTabela = new DefaultTableModel();
 		tabelaAmigos = new JTable(modeloTabela);
@@ -95,6 +97,26 @@ public class AgendaContatosView extends JFrame{
 		}
 	}
 	
+	// Atualiza a tabela com dados que batem com o filtro aplicado
+	public void atualizarTabelaBusca(List<Amigo> listaRegistrosEquivalentes){
+		limparTabela();
+		
+		for(int j = 0; j < listaRegistrosEquivalentes.size(); j++){
+			this.getModeloTabela().addRow(new Object[]{
+				listaRegistrosEquivalentes.get(j).getId(),
+				listaRegistrosEquivalentes.get(j).getNome(),
+				listaRegistrosEquivalentes.get(j).getApelido(),
+				listaRegistrosEquivalentes.get(j).getEmail(),
+				listaRegistrosEquivalentes.get(j).getCelular()
+			});
+		}
+	}
+
+	// Remove todas as linhas da tabela
+	public void limparTabela(){
+		this.getModeloTabela().setRowCount(0);
+	}
+
 	public void montarColunas() {
 		for(int i = 0; i < colunasTabela.length; i++) {
 			this.getModeloTabela().addColumn(colunasTabela[i]);
@@ -160,5 +182,9 @@ public class AgendaContatosView extends JFrame{
 
 	public static String[] getColunastabela() {
 		return colunasTabela;
+	}
+
+	public JTextField getInputBusca(){
+		return this.inputBusca;
 	}
 }

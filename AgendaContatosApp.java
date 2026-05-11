@@ -1,4 +1,4 @@
-package AgendaAmigos;
+// package AgendaAmigos;
 
 import javax.swing.*;
 
@@ -7,10 +7,7 @@ public class AgendaContatosApp {
 		SwingUtilities.invokeLater(() ->{
 			AgendaContatosModel model = new AgendaContatosModel();
 			AgendaContatosView view = new AgendaContatosView();
-			AgendaContatosController controller = new AgendaContatosController(view, model);
-			DialogIncluirPessoa dialog = new DialogIncluirPessoa(controller);
-			
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			new AgendaContatosController(view, model);
 			view.setVisible(true);
 		});
 	}

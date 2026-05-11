@@ -1,6 +1,7 @@
-package AgendaAmigos;
+// package AgendaAmigos;
 
 import java.util.*;
+import java.util.List;
 
 public class AgendaContatosModel {
 	private List<Amigo> listaAmigos;
@@ -21,6 +22,12 @@ public class AgendaContatosModel {
 				this.listaAmigos.remove(i);
 			}
 		}
-		
+	}
+
+	// Recebe uma string e retorna a lista com os resultados equivalentes
+	public List<Amigo> buscar(String nome){
+		return this.listaAmigos.stream().filter(
+			a -> a.getNome().contains(nome)
+		).toList();
 	}
 }

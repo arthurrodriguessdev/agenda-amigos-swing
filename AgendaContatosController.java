@@ -1,4 +1,4 @@
-package AgendaAmigos;
+// package AgendaAmigos;
 
 import java.util.*;
 
@@ -46,8 +46,9 @@ public class AgendaContatosController {
 		
 	}
 	
+	// Chama o buscar da model e já passa como parâmetro para atualizar a tabela
 	public void buscar() {
-		
+		view.atualizarTabelaBusca(model.buscar(view.getInputBusca().getText()));
 	}
 
 	public AgendaContatosView getView() {

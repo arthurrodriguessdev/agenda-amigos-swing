@@ -1,4 +1,5 @@
-package AgendaAmigos;
+// package AgendaAmigos;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
