@@ -1,5 +1,4 @@
 package AgendaAmigos;
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -19,12 +18,10 @@ public class DialogIncluirPessoa extends JDialog {
 	private JTextField inputNome;
 	private JButton okButton;
 	private JButton cancelButton;
-	private AgendaContatosModel model;
 	private AgendaContatosController controller;
 	
 	
-	public DialogIncluirPessoa(AgendaContatosModel model, AgendaContatosController controller) {
-		this.model = model;
+	public DialogIncluirPessoa(AgendaContatosController controller) {
 		this.controller = controller;
 		
 		estilizar();
@@ -41,17 +38,20 @@ public class DialogIncluirPessoa extends JDialog {
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
-
+		
+		// Botões
 		okButton = new JButton("Confirmar");
 		okButton.setActionCommand("OK");
+		okButton.setBackground(new Color(46, 204, 113));
+		okButton.setForeground(new Color(255, 255, 255));
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
 
 		cancelButton = new JButton("Cancelar");
 		cancelButton.setActionCommand("Cancel");
+		cancelButton.setBackground(new Color(231, 76, 60));
+		cancelButton.setForeground(new Color(255, 255, 255));
 		buttonPane.add(cancelButton);
-
-
 
 		JPanel painelInputs = new JPanel();
 		painelInputs.setBackground(new Color(192, 192, 192));
@@ -169,14 +169,6 @@ public class DialogIncluirPessoa extends JDialog {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public AgendaContatosModel getModel() {
-		return model;
-	}
-
-	public void setModel(AgendaContatosModel model) {
-		this.model = model;
 	}
 
 }

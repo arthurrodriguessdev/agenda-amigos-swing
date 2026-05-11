@@ -65,6 +65,7 @@ public class AgendaContatosView extends JFrame{
 		add(new JScrollPane(tabelaAmigos), BorderLayout.CENTER);
 	}
 	
+	// Atualiza a tabela gráfica na inclusão
 	public void atualizarIncluirLista(Amigo novoAmigo) {
 		this.getModeloTabela().addRow(new Object[] {
 				novoAmigo.getId(),
@@ -73,6 +74,25 @@ public class AgendaContatosView extends JFrame{
 				novoAmigo.getEmail(),
 				novoAmigo.getCelular()	
 		});
+	}
+	
+	// Atualiza a tabela gráfica na exclusão
+	public void atualizarExcluirLista(int idAmigo) {
+		int indiceLinhaRemover = -1;
+		int valorId = 0;
+		
+		for(int i = 0; i < this.getModeloTabela().getRowCount(); i++) {
+			valorId = (int) this.getModeloTabela().getValueAt(i, 0);
+			
+			if(valorId == idAmigo) {
+				indiceLinhaRemover = i;
+				break;
+			}
+		}
+		
+		if(indiceLinhaRemover != -1) {
+			this.getModeloTabela().removeRow(indiceLinhaRemover);
+		}
 	}
 	
 	public void montarColunas() {
