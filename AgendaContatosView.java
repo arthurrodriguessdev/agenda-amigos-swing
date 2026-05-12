@@ -1,4 +1,4 @@
-// package AgendaAmigos;
+package AgendaAmigos;
 
 import java.awt.EventQueue;
 import javax.swing.table.DefaultTableModel;
@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.border.LineBorder;
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 public class AgendaContatosView extends JFrame{
 	private JPanel painelBotoes;
@@ -27,6 +30,7 @@ public class AgendaContatosView extends JFrame{
 	public AgendaContatosView() {
 		initialize();
 		montarColunas();
+		configurarCoresEstilosBotoes();
 	}
 
 	private void initialize() {
@@ -67,6 +71,39 @@ public class AgendaContatosView extends JFrame{
 		add(new JScrollPane(tabelaAmigos), BorderLayout.CENTER);
 	}
 	
+	// Este método define cores e chama o método que irá realmente aplicar os hover(s)
+	void configurarCoresEstilosBotoes() {
+		Color corBranca = new Color(255, 255, 255);
+		Color corAzul = new Color(98, 110, 220);
+		Color corVerde = new Color(46, 204, 113);
+		Color corVermelha = new Color(231, 76, 60);
+		
+		aplicarEfeitosCoresBotoes(corVerde, corBranca, this.getBtnIncluir());
+		aplicarEfeitosCoresBotoes(corAzul, corBranca, this.getBtnAlterar());
+		aplicarEfeitosCoresBotoes(corVermelha, corBranca, this.getBtnExcluir());
+		aplicarEfeitosCoresBotoes(corAzul, corBranca, this.getBtnBuscar());
+	}
+	
+	// Este método recebe as cores, o botão e aplica o hover
+	void aplicarEfeitosCoresBotoes(Color corFundo, Color corTexto, JButton botao) {
+		Color corOriginalFundo = this.getBtnBuscar().getBackground();
+		Color corOriginalTexto = this.getBtnBuscar().getForeground();
+		
+		botao.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				botao.setBackground(corFundo);
+				botao.setForeground(corTexto);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				botao.setBackground(corOriginalFundo);
+				botao.setForeground(corOriginalTexto);
+			}
+			
+		});
+	}
 	// Atualiza a tabela gráfica na inclusão
 	public void atualizarIncluirLista(Amigo novoAmigo) {
 		this.getModeloTabela().addRow(new Object[] {
@@ -81,7 +118,7 @@ public class AgendaContatosView extends JFrame{
 	// Atualiza a tabela gráfica na exclusão
 	public void atualizarExcluirLista(int idAmigo) {
 		int indiceLinhaRemover = -1;
-		int valorId = 0;
+		int valorId = -1;
 		
 		for(int i = 0; i < this.getModeloTabela().getRowCount(); i++) {
 			valorId = (int) this.getModeloTabela().getValueAt(i, 0);
@@ -95,6 +132,29 @@ public class AgendaContatosView extends JFrame{
 		if(indiceLinhaRemover != -1) {
 			this.getModeloTabela().removeRow(indiceLinhaRemover);
 		}
+	}
+	
+	// Atualiza a tabela com os novos dados de um registro
+	public void atualizarAlteracaoLista(Amigo amigoAtualizado) {
+		try {
+			int idAmigoAlterado = amigoAtualizado.getId();
+			int valorId = -1;
+			
+			for(int i = 0; i < this.getModeloTabela().getRowCount(); i++) {
+				valorId = (int) this.getModeloTabela().getValueAt(i, 0);
+				
+				if(idAmigoAlterado == valorId) {
+					this.getModeloTabela().setValueAt(amigoAtualizado.getNome(), i, 1);
+					this.getModeloTabela().setValueAt(amigoAtualizado.getApelido(), i, 2);
+					this.getModeloTabela().setValueAt(amigoAtualizado.getEmail(), i, 3);
+					this.getModeloTabela().setValueAt(amigoAtualizado.getCelular(), i, 4);
+				}
+			}
+			
+		} catch(NullPointerException e) {
+			System.out.println("\nErro de alteração: " + e.getMessage());
+		}
+
 	}
 	
 	// Atualiza a tabela com dados que batem com o filtro aplicado

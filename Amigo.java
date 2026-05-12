@@ -1,4 +1,4 @@
-// package AgendaAmigos;
+ package AgendaAmigos;
 
 public class Amigo {
 	private static int idIndex = 1;

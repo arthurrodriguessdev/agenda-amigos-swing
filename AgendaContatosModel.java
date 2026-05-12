@@ -1,4 +1,4 @@
-// package AgendaAmigos;
+ package AgendaAmigos;
 
 import java.util.*;
 import java.util.List;
@@ -30,14 +30,17 @@ public class AgendaContatosModel {
 		).toList();
 	}
 
-	public void alterar(int id, String nome, String email, String telefone, String apelido){
+	public Amigo alterar(int id, String nome, String email, String telefone, String apelido){
 		int indiceAmigoLista = buscarIndiceAmigo(id);
 		if(indiceAmigoLista != -1){
 			this.listaAmigos.get(indiceAmigoLista).setApelido(apelido);
 			this.listaAmigos.get(indiceAmigoLista).setCelular(telefone);
 			this.listaAmigos.get(indiceAmigoLista).setEmail(email);
 			this.listaAmigos.get(indiceAmigoLista).setNome(nome);
+			return this.listaAmigos.get(indiceAmigoLista);
 		}
+		
+		return null;
 	}
 
 	// Recebe um ID, percorre a lista e retorna a posição do amigo

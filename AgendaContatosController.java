@@ -1,4 +1,4 @@
-// package AgendaAmigos;
+package AgendaAmigos;
 
 import java.util.*;
 
@@ -36,7 +36,7 @@ public class AgendaContatosController {
 	}
 	
 	// Operações propriamente ditas: incluir, excluir, alterar e buscar
-	public void incluir(int id, String nome, String email, String telefone, String apelido){
+	public void incluir(String nome, String email, String telefone, String apelido){
 		Amigo novoAmigo = model.incluir(nome, email, telefone, apelido);
 		view.atualizarIncluirLista(novoAmigo);
 	}
@@ -46,14 +46,10 @@ public class AgendaContatosController {
 		view.atualizarExcluirLista(idAmigo);
 	}
 
-	public void alterar(String nome, String email, String telefone, String apelido){
-
+	public void alterar(int id, String nome, String email, String telefone, String apelido){
+		view.atualizarAlteracaoLista(model.alterar(id, nome, email, telefone, apelido));
 	}
 	
-	
-	public void alterar() {
-		
-	}
 	
 	// Chama o buscar da model e já passa como parâmetro para atualizar a tabela
 	public void buscar() {
