@@ -27,34 +27,52 @@ public class DialogExcluirPessoa extends JDialog {
 	}
 	
 	public void estilizar(){
-		setBounds(100, 100, 450, 300);
+		setTitle("Excluir Amigo");
+		setModal(true);
+		setLocationRelativeTo(null);
+
+		setUndecorated(true);
+		getRootPane().setWindowDecorationStyle(javax.swing.JRootPane.FRAME);
+
+		setBounds(100, 100, 500, 250);
 		getContentPane().setLayout(new BorderLayout());
 
+		// Painel dos botões
 		buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-		okButton = new JButton("OK");
+		// Botão confirmar
+		okButton = new JButton("Confirmar");
 		okButton.setActionCommand("OK");
+		okButton.setBackground(new Color(46, 204, 113));
+		okButton.setForeground(Color.WHITE);
 		buttonPane.add(okButton);
+
 		getRootPane().setDefaultButton(okButton);
-		
-		cancelButton = new JButton("Cancel");
+
+		// Botão cancelar
+		cancelButton = new JButton("Cancelar");
 		cancelButton.setActionCommand("Cancel");
+		cancelButton.setBackground(new Color(231, 76, 60));
+		cancelButton.setForeground(Color.WHITE);
 		buttonPane.add(cancelButton);
 
+		// Painel principal
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(192, 192, 192));
 		getContentPane().add(panel, BorderLayout.CENTER);
-		
+
+		// Label
 		JLabel labelId = new JLabel("ID do Amigo:");
 		labelId.setFont(new Font("Arial", Font.PLAIN, 18));
 		panel.add(labelId);
-		
+
+		// Input
 		inputId = new JTextField();
 		inputId.setFont(new Font("Arial", Font.PLAIN, 14));
+		inputId.setColumns(15);
 		panel.add(inputId);
-		inputId.setColumns(10);
 	}
 	
 	public void configurarEventos() {
@@ -65,6 +83,7 @@ public class DialogExcluirPessoa extends JDialog {
 	public void confirmarExclusao() {
 		int idExcluir = Integer.parseInt(this.getInputId().getText());
 		this.getController().excluir(idExcluir);
+		dispose();
 	}
 	
 	public void cancelarExclusao() {

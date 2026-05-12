@@ -17,10 +17,9 @@ public class AgendaContatosModel {
 	}
 	
 	public void excluir(int idExcluir) {
-		for(int i = 0; i < listaAmigos.size(); i++) {
-			if(this.listaAmigos.get(i).getId() == idExcluir) {
-				this.listaAmigos.remove(i);
-			}
+		int indiceAmigoLista = buscarIndiceAmigo(idExcluir);
+		if(indiceAmigoLista != -1){
+			this.listaAmigos.remove(indiceAmigoLista);
 		}
 	}
 
@@ -29,5 +28,26 @@ public class AgendaContatosModel {
 		return this.listaAmigos.stream().filter(
 			a -> a.getNome().contains(nome)
 		).toList();
+	}
+
+	public void alterar(int id, String nome, String email, String telefone, String apelido){
+		int indiceAmigoLista = buscarIndiceAmigo(id);
+		if(indiceAmigoLista != -1){
+			this.listaAmigos.get(indiceAmigoLista).setApelido(apelido);
+			this.listaAmigos.get(indiceAmigoLista).setCelular(telefone);
+			this.listaAmigos.get(indiceAmigoLista).setEmail(email);
+			this.listaAmigos.get(indiceAmigoLista).setNome(nome);
+		}
+	}
+
+	// Recebe um ID, percorre a lista e retorna a posição do amigo
+	public int buscarIndiceAmigo(int id){
+		for(int i = 0; i < listaAmigos.size(); i++) {
+			if(this.listaAmigos.get(i).getId() == id) {
+				return i;
+			}
+		}
+
+		return -1;
 	}
 }

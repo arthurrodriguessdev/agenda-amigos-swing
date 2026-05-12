@@ -30,6 +30,10 @@ public class DialogIncluirPessoa extends JDialog {
 	}
 	
 	public void estilizar() {
+		setTitle("Incluir Novo Amigo");
+		setModal(true);
+		setLocationRelativeTo(null);
+
 		setUndecorated(true); 
 	    getRootPane().setWindowDecorationStyle(javax.swing.JRootPane.FRAME);
 	    
@@ -112,6 +116,7 @@ public class DialogIncluirPessoa extends JDialog {
 				this.getInputCelular().getText(),
 				this.getInputApelido().getText()
 		);
+		dispose();
 	}
 	
 	public void cancelarInclusao() {

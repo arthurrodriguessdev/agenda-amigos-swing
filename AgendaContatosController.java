@@ -14,24 +14,29 @@ public class AgendaContatosController {
 	
 	public void configurarEventos() {
 		view.getBtnIncluir().addActionListener(e ->habilitarIncluir());
-		view.getBtnAlterar().addActionListener(e -> alterar());
+		view.getBtnAlterar().addActionListener(e -> habilitarAlterar());
 		view.getBtnExcluir().addActionListener(e -> habilitarExcluir());
 		view.getBtnBuscar().addActionListener(e -> buscar());
 	}
 	
 	// Eventos dos botões: habilitar dialogs
-	public void habilitarIncluir() {
+	public void habilitarIncluir(){
 		DialogIncluirPessoa dialog = new DialogIncluirPessoa(this);
 		dialog.setVisible(true);
 	}
 	
-	public void habilitarExcluir() {
+	public void habilitarExcluir(){
 		DialogExcluirPessoa dialogExcluir = new DialogExcluirPessoa(this);
 		dialogExcluir.setVisible(true);
 	}
+
+	public void habilitarAlterar(){
+		DialogAlterarPessoa dialogAlterar = new DialogAlterarPessoa(this);
+		dialogAlterar.setVisible(true);
+	}
 	
 	// Operações propriamente ditas: incluir, excluir, alterar e buscar
-	public void incluir(String nome, String email, String telefone, String apelido) {
+	public void incluir(int id, String nome, String email, String telefone, String apelido){
 		Amigo novoAmigo = model.incluir(nome, email, telefone, apelido);
 		view.atualizarIncluirLista(novoAmigo);
 	}
@@ -39,6 +44,10 @@ public class AgendaContatosController {
 	public void excluir(int idAmigo) {
 		model.excluir(idAmigo);
 		view.atualizarExcluirLista(idAmigo);
+	}
+
+	public void alterar(String nome, String email, String telefone, String apelido){
+
 	}
 	
 	
