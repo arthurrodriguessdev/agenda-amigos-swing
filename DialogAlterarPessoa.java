@@ -32,6 +32,11 @@ public class DialogAlterarPessoa extends JDialog {
 	}
 	
 	void estilizar() {
+		setModal(true);
+		setLocationRelativeTo(null);
+
+		setUndecorated(true);
+		getRootPane().setWindowDecorationStyle(javax.swing.JRootPane.FRAME);
 		setTitle("Alterar Amigo");
 		setBounds(100, 100, 755, 400);
 		getContentPane().setLayout(new BorderLayout());
@@ -64,6 +69,8 @@ public class DialogAlterarPessoa extends JDialog {
 		painelTitulo.add(titulo);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));		
+		
 		getContentPane().add(panel, BorderLayout.CENTER);
 		getContentPane().add(painelTitulo, BorderLayout.NORTH);
 		

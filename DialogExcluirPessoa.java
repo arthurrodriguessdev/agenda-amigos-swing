@@ -84,6 +84,7 @@ public class DialogExcluirPessoa extends JDialog {
 		inputId = new JTextField();
 		inputId.setFont(new Font("Arial", Font.PLAIN, 14));
 		inputId.setColumns(15);
+		panel.add(labelId);
 		panel.add(inputId);
 	}
 	
