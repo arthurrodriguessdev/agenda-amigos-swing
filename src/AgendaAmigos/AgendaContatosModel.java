@@ -53,4 +53,8 @@ public class AgendaContatosModel {
 
 		return -1;
 	}
+	
+	public List<Amigo> getListaAmigos(){
+		return this.listaAmigos;
+	}
 }

@@ -21,9 +21,11 @@ public class AgendaContatosView extends JFrame{
 	private JButton btnIncluir;
 	private JButton btnBuscar;
 	private JButton btnAlterar;
+	private JButton btnSalvarArquivo;
+	private JButton btnImportarDados;
 	private JTable tabelaAmigos;
 	private DefaultTableModel modeloTabela;
-	private static final String[] colunasTabela = {
+	private static String[] colunasTabela = {
 			"ID", "Nome", "Apelido", "E-mail", "Celular"
 	};
 
@@ -59,6 +61,12 @@ public class AgendaContatosView extends JFrame{
 		
 		btnAlterar = new JButton("Alterar");
 		painelBotoes.add(btnAlterar);
+		
+		btnSalvarArquivo = new JButton("Salvar no Arquivo");
+		painelBotoes.add(btnSalvarArquivo);
+		
+		btnImportarDados = new JButton("Importar Dados");
+		painelBotoes.add(btnImportarDados);
 		
 		getContentPane().add(painelBotoes, BorderLayout.SOUTH);
 
@@ -160,17 +168,17 @@ public class AgendaContatosView extends JFrame{
 
 	}
 	
-	// Atualiza a tabela com dados que batem com o filtro aplicado
-	public void atualizarTabelaBusca(List<Amigo> listaRegistrosEquivalentes){
+	// Ver se pode deixar somente um
+	public void atualizarTodosRegistros(List<Amigo> listaAmigos) {
 		limparTabela();
 		
-		for(int j = 0; j < listaRegistrosEquivalentes.size(); j++){
+		for(int j = 0; j < listaAmigos.size(); j++){
 			this.getModeloTabela().addRow(new Object[]{
-				listaRegistrosEquivalentes.get(j).getId(),
-				listaRegistrosEquivalentes.get(j).getNome(),
-				listaRegistrosEquivalentes.get(j).getApelido(),
-				listaRegistrosEquivalentes.get(j).getEmail(),
-				listaRegistrosEquivalentes.get(j).getCelular()
+					listaAmigos.get(j).getId(),
+					listaAmigos.get(j).getNome(),
+					listaAmigos.get(j).getApelido(),
+					listaAmigos.get(j).getEmail(),
+					listaAmigos.get(j).getCelular()
 			});
 		}
 	}
@@ -249,5 +257,45 @@ public class AgendaContatosView extends JFrame{
 
 	public JTextField getInputBusca(){
 		return this.inputBusca;
+	}
+
+	public JPanel getPainelBusca() {
+		return painelBusca;
+	}
+
+	public void setPainelBusca(JPanel painelBusca) {
+		this.painelBusca = painelBusca;
+	}
+
+	public JButton getBtnSalvarArquivo() {
+		return btnSalvarArquivo;
+	}
+
+	public void setBtnSalvarArquivo(JButton btnSalvarArquivo) {
+		this.btnSalvarArquivo = btnSalvarArquivo;
+	}
+
+	public void setInputBusca(JTextField inputBusca) {
+		this.inputBusca = inputBusca;
+	}
+
+	public static void setColunastabela(String[] colunastabela) {
+		colunasTabela = colunastabela;
+	}
+
+	public JButton getBtnImportarDados() {
+		return btnImportarDados;
+	}
+
+	public void setBtnImportarDados(JButton btnImportarDados) {
+		this.btnImportarDados = btnImportarDados;
+	}
+
+	public static String[] getColunasTabela() {
+		return colunasTabela;
+	}
+
+	public static void setColunasTabela(String[] colunasTabela) {
+		AgendaContatosView.colunasTabela = colunasTabela;
 	}
 }

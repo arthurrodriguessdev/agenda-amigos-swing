@@ -17,6 +17,8 @@ public class AgendaContatosController {
 		view.getBtnAlterar().addActionListener(e -> habilitarAlterar());
 		view.getBtnExcluir().addActionListener(e -> habilitarExcluir());
 		view.getBtnBuscar().addActionListener(e -> buscar());
+		view.getBtnSalvarArquivo().addActionListener(e -> salvarArquivo());
+		view.getBtnImportarDados().addActionListener(e -> importarDados());
 	}
 	
 	// Eventos dos botões: habilitar dialogs
@@ -53,9 +55,19 @@ public class AgendaContatosController {
 	
 	// Chama o buscar da model e já passa como parâmetro para atualizar a tabela
 	public void buscar() {
-		view.atualizarTabelaBusca(model.buscar(view.getInputBusca().getText()));
+		view.atualizarTodosRegistros(model.buscar(view.getInputBusca().getText()));
 	}
-
+	
+	public void salvarArquivo() {
+		PersistenciaContato persistencia = new PersistenciaContato();
+		persistencia.salvarArquivo(model.getListaAmigos());
+	}
+	
+	public void importarDados(){
+		PersistenciaContato persistencia = new PersistenciaContato();
+		view.atualizarTodosRegistros(persistencia.importarDadosArquivo(model.getListaAmigos()));
+	}
+	
 	public AgendaContatosView getView() {
 		return view;
 	}
