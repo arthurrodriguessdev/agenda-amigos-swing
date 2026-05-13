@@ -1,4 +1,4 @@
- package AgendaAmigos;
+package AgendaAmigos;
 
 import javax.swing.*;
 

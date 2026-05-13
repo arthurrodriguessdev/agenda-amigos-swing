@@ -1,12 +1,11 @@
 package AgendaAmigos;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -31,6 +30,7 @@ public class DialogAlterarPessoa extends JDialog {
 	}
 	
 	void estilizar() {
+		setTitle("Alterar Amigo");
 		setBounds(100, 100, 755, 400);
 		getContentPane().setLayout(new BorderLayout());
 
@@ -38,13 +38,17 @@ public class DialogAlterarPessoa extends JDialog {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-		okButton = new JButton("OK");
+		okButton = new JButton("Confirmar");
 		okButton.setActionCommand("OK");
+		okButton.setBackground(new Color(46, 204, 113));
+		okButton.setForeground(new Color(255, 255, 255));
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
 	
 	
-		cancelButton = new JButton("Cancel");
+		cancelButton = new JButton("Cancelar");
+		cancelButton.setBackground(new Color(231, 76, 60));
+		cancelButton.setForeground(new Color(255, 255, 255));
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
 		
@@ -103,13 +107,30 @@ public class DialogAlterarPessoa extends JDialog {
 	}
 	
 	void confirmarAlteracao() {
-		this.controller.alterar(
-				Integer.parseInt(this.getInputId().getText()),
-				this.getInputNovoNome().getText(),
-				this.getInputNovoEmail().getText(),
-				this.getInputNovoCelular().getText(),
-				this.getInputNovoApelido().getText()
-		);
+		String novoNome = this.getInputNovoNome().getText();
+		String novoEmail = this.getInputNovoEmail().getText();
+		String novoCelular = this.getInputNovoCelular().getText();
+		String novoApelido = this.getInputNovoApelido().getText();
+		boolean podeAlterar = !novoNome.isEmpty() && !novoEmail.isEmpty() && !novoApelido.isEmpty() && !novoCelular.isEmpty();
+		int id = -1;
+
+		try{
+			id = Integer.parseInt(this.getInputId().getText());
+		} catch(NumberFormatException e){
+			System.out.println("\nErro na conversão: " + e.getMessage());
+		}
+
+		if(id != -1 && podeAlterar){
+			this.controller.alterar(
+					Integer.parseInt(this.getInputId().getText()),
+					this.getInputNovoNome().getText(),
+					this.getInputNovoEmail().getText(),
+					this.getInputNovoCelular().getText(),
+					this.getInputNovoApelido().getText()
+			);
+
+			dispose();
+		}
 	}
 	
 	void cancelarAlteracao() {

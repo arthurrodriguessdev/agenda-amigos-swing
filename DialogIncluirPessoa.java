@@ -110,12 +110,17 @@ public class DialogIncluirPessoa extends JDialog {
 	
 	// Métodos de Eventos
 	public void confirmarInclusao() {
-		controller.incluir(
-				this.getInputNome().getText(),
-				this.getInputEmail().getText(),
-				this.getInputCelular().getText(),
-				this.getInputApelido().getText()
-		);
+		String nome = this.getInputNome().getText();
+		String email = this.getInputEmail().getText();
+		String celular = this.getInputCelular().getText();
+		String apelido = this.getInputApelido().getText();
+		boolean podeIncluir = !nome.isEmpty() && !email.isEmpty() && !celular.isEmpty() && !apelido.isEmpty();
+
+		// Só pode incluir se nenhum campo estiver em branco
+		if(podeIncluir){
+			controller.incluir( nome, email, celular, apelido);
+		}
+
 		dispose();
 	}
 	

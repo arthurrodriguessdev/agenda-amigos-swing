@@ -1,4 +1,4 @@
- package AgendaAmigos;
+package AgendaAmigos;
 
 import java.util.*;
 import java.util.List;
