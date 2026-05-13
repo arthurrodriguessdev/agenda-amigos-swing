@@ -20,6 +20,8 @@ public class DialogAlterarPessoa extends JDialog {
 	private JTextField inputNovoApelido;
 	private JTextField inputNovoCelular;
 	private JButton okButton;
+	private JLabel titulo;
+	private JPanel painelTitulo;
 	private JButton cancelButton;
 	
 	public DialogAlterarPessoa(AgendaContatosController controller) {
@@ -52,8 +54,18 @@ public class DialogAlterarPessoa extends JDialog {
 		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
 		
+		// Título
+		titulo = new JLabel("ALTERAÇÃO DE AMIGO");
+		titulo.setForeground(new Color(255, 255, 255));
+
+		// Painel do Título
+		painelTitulo = new JPanel();
+		painelTitulo.setBackground(new Color(98, 160, 234));
+		painelTitulo.add(titulo);
+
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
+		getContentPane().add(painelTitulo, BorderLayout.NORTH);
 		
 		JLabel labelId = new JLabel("ID:");
 		labelId.setFont(new Font("Arial", Font.PLAIN, 14));

@@ -17,9 +17,12 @@ public class DialogIncluirPessoa extends JDialog {
 	private JTextField inputEmail;
 	private JTextField inputApelido;
 	private JTextField inputNome;
+	private JPanel painelInputs;
+	private JPanel painelTitulo;
 	private JButton okButton;
 	private JButton cancelButton;
 	private AgendaContatosController controller;
+	private JLabel titulo;
 	
 	
 	public DialogIncluirPessoa(AgendaContatosController controller) {
@@ -58,8 +61,17 @@ public class DialogIncluirPessoa extends JDialog {
 		cancelButton.setForeground(new Color(255, 255, 255));
 		buttonPane.add(cancelButton);
 
-		JPanel painelInputs = new JPanel();
-		painelInputs.setBackground(new Color(192, 192, 192));
+		titulo = new JLabel("INCLUSÃO DE NOVOS AMIGOS");
+		titulo.setForeground(new Color(255, 255, 255));
+
+		painelTitulo = new JPanel();
+		painelTitulo.setBackground(new Color(98, 160, 234));
+		painelTitulo.add(titulo);
+
+		painelInputs = new JPanel();
+		painelInputs.setBackground(new Color(255, 255, 255));
+
+		getContentPane().add(painelTitulo, BorderLayout.NORTH);
 		getContentPane().add(painelInputs, BorderLayout.CENTER);
 
 		JLabel labelCelular = new JLabel("Celular:");
@@ -180,6 +192,10 @@ public class DialogIncluirPessoa extends JDialog {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public JLabel getTitulo(){
+		return this.titulo;
 	}
 
 }

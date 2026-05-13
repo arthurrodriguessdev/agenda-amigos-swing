@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -17,6 +18,8 @@ public class DialogExcluirPessoa extends JDialog {
 	private JButton okButton;
 	private JButton cancelButton;
 	private JPanel buttonPane;
+	private JPanel painelTitulo;
+	private JLabel titulo;
 	private AgendaContatosController controller;
 
 	public DialogExcluirPessoa(AgendaContatosController controller) {
@@ -58,15 +61,24 @@ public class DialogExcluirPessoa extends JDialog {
 		cancelButton.setForeground(Color.WHITE);
 		buttonPane.add(cancelButton);
 
+		// Título
+		titulo = new JLabel("EXCLUSÃO DE AMIGOS");
+		titulo.setForeground(new Color(255, 255, 255));
+
+		// Painel do Título
+		painelTitulo = new JPanel();
+		painelTitulo.setBackground(new Color(98, 160, 234));
+		painelTitulo.add(titulo);
+
 		// Painel principal
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(192, 192, 192));
+		panel.setBackground(new Color(255, 255, 255));
 		getContentPane().add(panel, BorderLayout.CENTER);
+		getContentPane().add(painelTitulo, BorderLayout.NORTH);
 
 		// Label
 		JLabel labelId = new JLabel("ID do Amigo:");
 		labelId.setFont(new Font("Arial", Font.PLAIN, 18));
-		panel.add(labelId);
 
 		// Input
 		inputId = new JTextField();

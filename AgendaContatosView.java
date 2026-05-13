@@ -36,6 +36,7 @@ public class AgendaContatosView extends JFrame{
 	private void initialize() {
 		setBounds(100, 100, 540, 474);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Agenda de Amigos");
 		
 		// Painel de Busca (superior)
 		painelBusca = new JPanel(new BorderLayout(10, 10));
@@ -66,8 +67,9 @@ public class AgendaContatosView extends JFrame{
 		tabelaAmigos = new JTable(modeloTabela);
 		tabelaAmigos.setColumnSelectionAllowed(true);
 		tabelaAmigos.setRowSelectionAllowed(false);
-		tabelaAmigos.setBorder(new LineBorder(new Color(53, 132, 228), 1, true));
-		tabelaAmigos.setBackground(new Color(222, 221, 218));
+		tabelaAmigos.setBorder(new LineBorder(new Color(98, 160, 234), 1, true));
+		tabelaAmigos.setBackground(new Color(255, 255, 255));
+		tabelaAmigos.setAutoscrolls(true);
 		add(new JScrollPane(tabelaAmigos), BorderLayout.CENTER);
 	}
 	
@@ -104,6 +106,7 @@ public class AgendaContatosView extends JFrame{
 			
 		});
 	}
+
 	// Atualiza a tabela gráfica na inclusão
 	public void atualizarIncluirLista(Amigo novoAmigo) {
 		this.getModeloTabela().addRow(new Object[] {
